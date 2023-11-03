@@ -1,0 +1,23 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 16
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "Reee", "Reee.vcxproj", "{A6C18B7C-92F8-8C0D-3BE5-721027FB080F}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|x64 = Debug|x64
+		Dist|x64 = Dist|x64
+		Release|x64 = Release|x64
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{A6C18B7C-92F8-8C0D-3BE5-721027FB080F}.Debug|x64.ActiveCfg = Debug|x64
+		{A6C18B7C-92F8-8C0D-3BE5-721027FB080F}.Debug|x64.Build.0 = Debug|x64
+		{A6C18B7C-92F8-8C0D-3BE5-721027FB080F}.Dist|x64.ActiveCfg = Dist|x64
+		{A6C18B7C-92F8-8C0D-3BE5-721027FB080F}.Dist|x64.Build.0 = Dist|x64
+		{A6C18B7C-92F8-8C0D-3BE5-721027FB080F}.Release|x64.ActiveCfg = Release|x64
+		{A6C18B7C-92F8-8C0D-3BE5-721027FB080F}.Release|x64.Build.0 = Release|x64
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+EndGlobal

@@ -1,0 +1,340 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup Label="ProjectConfigurations">
+    <ProjectConfiguration Include="Debug|x64">
+      <Configuration>Debug</Configuration>
+      <Platform>x64</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Release|x64">
+      <Configuration>Release</Configuration>
+      <Platform>x64</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Dist|x64">
+      <Configuration>Dist</Configuration>
+      <Platform>x64</Platform>
+    </ProjectConfiguration>
+  </ItemGroup>
+  <PropertyGroup Label="Globals">
+    <ProjectGuid>{29D52ABC-9595-A6F2-5ED0-EF6FCA4FEBCE}</ProjectGuid>
+    <IgnoreWarnCompileDuplicatedFilename>true</IgnoreWarnCompileDuplicatedFilename>
+    <Keyword>Win32Proj</Keyword>
+    <RootNamespace>Eunoia-Engine</RootNamespace>
+    <WindowsTargetPlatformVersion>10.0</WindowsTargetPlatformVersion>
+  </PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'" Label="Configuration">
+    <ConfigurationType>DynamicLibrary</ConfigurationType>
+    <UseDebugLibraries>true</UseDebugLibraries>
+    <CharacterSet>Unicode</CharacterSet>
+    <PlatformToolset>v142</PlatformToolset>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'" Label="Configuration">
+    <ConfigurationType>DynamicLibrary</ConfigurationType>
+    <UseDebugLibraries>false</UseDebugLibraries>
+    <CharacterSet>Unicode</CharacterSet>
+    <PlatformToolset>v142</PlatformToolset>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Dist|x64'" Label="Configuration">
+    <ConfigurationType>DynamicLibrary</ConfigurationType>
+    <UseDebugLibraries>false</UseDebugLibraries>
+    <CharacterSet>Unicode</CharacterSet>
+    <PlatformToolset>v142</PlatformToolset>
+  </PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.props" />
+  <ImportGroup Label="ExtensionSettings">
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Dist|x64'">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+  </ImportGroup>
+  <PropertyGroup Label="UserMacros" />
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
+    <LinkIncremental>true</LinkIncremental>
+    <OutDir>..\Bin\Debug-windows-x86_64\Eunoia-Engine\</OutDir>
+    <IntDir>..\Bin-Int\Debug-windows-x86_64\Eunoia-Engine\</IntDir>
+    <TargetName>Eunoia-Engine</TargetName>
+    <TargetExt>.dll</TargetExt>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
+    <LinkIncremental>false</LinkIncremental>
+    <OutDir>..\Bin\Release-windows-x86_64\Eunoia-Engine\</OutDir>
+    <IntDir>..\Bin-Int\Release-windows-x86_64\Eunoia-Engine\</IntDir>
+    <TargetName>Eunoia-Engine</TargetName>
+    <TargetExt>.dll</TargetExt>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Dist|x64'">
+    <LinkIncremental>false</LinkIncremental>
+    <OutDir>..\Bin\Dist-windows-x86_64\Eunoia-Engine\</OutDir>
+    <IntDir>..\Bin-Int\Dist-windows-x86_64\Eunoia-Engine\</IntDir>
+    <TargetName>Eunoia-Engine</TargetName>
+    <TargetExt>.dll</TargetExt>
+  </PropertyGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
+    <ClCompile>
+      <PrecompiledHeader>NotUsing</PrecompiledHeader>
+      <WarningLevel>Level3</WarningLevel>
+      <PreprocessorDefinitions>EU_BUILD_DLL;EU_ENGINE;EU_PLATFORM_WINDOWS;EU_DEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <AdditionalIncludeDirectories>Libs\Vulkan\Include;Libs\glm\Include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <DebugInformationFormat>EditAndContinue</DebugInformationFormat>
+      <Optimization>Disabled</Optimization>
+      <RuntimeLibrary>MultiThreadedDebug</RuntimeLibrary>
+      <LanguageStandard>stdcpp17</LanguageStandard>
+    </ClCompile>
+    <Link>
+      <SubSystem>Windows</SubSystem>
+      <GenerateDebugInformation>true</GenerateDebugInformation>
+      <AdditionalDependencies>Libs\Vulkan\x64\vulkan-1.lib;Xinput9_1_0.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <ImportLibrary>..\Bin\Debug-windows-x86_64\Eunoia-Engine\Eunoia-Engine.lib</ImportLibrary>
+    </Link>
+    <PreBuildEvent>
+      <Command>call "../Bin/Dist-windows-x86_64/Eunoia-Introspection/Eunoia-Introspection.exe" "Src/Eunoia/Eunoia.h" "Src/Eunoia/Metadata/EunoiaGenerated"</Command>
+    </PreBuildEvent>
+    <PostBuildEvent>
+      <Command>IF EXIST ..\Bin\Debug-windows-x86_64\Eunoia-Engine\Eunoia-Engine.dll\ (xcopy /Q /E /Y /I ..\Bin\Debug-windows-x86_64\Eunoia-Engine\Eunoia-Engine.dll ..\Bin\Debug-windows-x86_64\Eunoia-Sandbox\Eunoia-Engine.dll &gt; nul) ELSE (xcopy /Q /Y /I ..\Bin\Debug-windows-x86_64\Eunoia-Engine\Eunoia-Engine.dll ..\Bin\Debug-windows-x86_64\Eunoia-Sandbox\Eunoia-Engine.dll &gt; nul)
+IF EXIST ..\Bin\Debug-windows-x86_64\Eunoia-Engine\Eunoia-Engine.dll\ (xcopy /Q /E /Y /I ..\Bin\Debug-windows-x86_64\Eunoia-Engine\Eunoia-Engine.dll ..\Bin\Debug-windows-x86_64\Eunoia-Editor\Eunoia-Engine.dll &gt; nul) ELSE (xcopy /Q /Y /I ..\Bin\Debug-windows-x86_64\Eunoia-Engine\Eunoia-Engine.dll ..\Bin\Debug-windows-x86_64\Eunoia-Editor\Eunoia-Engine.dll &gt; nul)</Command>
+    </PostBuildEvent>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
+    <ClCompile>
+      <PrecompiledHeader>NotUsing</PrecompiledHeader>
+      <WarningLevel>Level3</WarningLevel>
+      <PreprocessorDefinitions>EU_BUILD_DLL;EU_ENGINE;EU_PLATFORM_WINDOWS;EU_RELEASE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <AdditionalIncludeDirectories>Libs\Vulkan\Include;Libs\glm\Include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <Optimization>Full</Optimization>
+      <FunctionLevelLinking>true</FunctionLevelLinking>
+      <IntrinsicFunctions>true</IntrinsicFunctions>
+      <MinimalRebuild>false</MinimalRebuild>
+      <StringPooling>true</StringPooling>
+      <RuntimeLibrary>MultiThreaded</RuntimeLibrary>
+      <LanguageStandard>stdcpp17</LanguageStandard>
+    </ClCompile>
+    <Link>
+      <SubSystem>Windows</SubSystem>
+      <EnableCOMDATFolding>true</EnableCOMDATFolding>
+      <OptimizeReferences>true</OptimizeReferences>
+      <AdditionalDependencies>Libs\Vulkan\x64\vulkan-1.lib;Xinput9_1_0.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <ImportLibrary>..\Bin\Release-windows-x86_64\Eunoia-Engine\Eunoia-Engine.lib</ImportLibrary>
+    </Link>
+    <PreBuildEvent>
+      <Command>call "../Bin/Dist-windows-x86_64/Eunoia-Introspection/Eunoia-Introspection.exe" "Src/Eunoia/Eunoia.h" "Src/Eunoia/Metadata/EunoiaGenerated"</Command>
+    </PreBuildEvent>
+    <PostBuildEvent>
+      <Command>IF EXIST ..\Bin\Release-windows-x86_64\Eunoia-Engine\Eunoia-Engine.dll\ (xcopy /Q /E /Y /I ..\Bin\Release-windows-x86_64\Eunoia-Engine\Eunoia-Engine.dll ..\Bin\Release-windows-x86_64\Eunoia-Sandbox\Eunoia-Engine.dll &gt; nul) ELSE (xcopy /Q /Y /I ..\Bin\Release-windows-x86_64\Eunoia-Engine\Eunoia-Engine.dll ..\Bin\Release-windows-x86_64\Eunoia-Sandbox\Eunoia-Engine.dll &gt; nul)
+IF EXIST ..\Bin\Release-windows-x86_64\Eunoia-Engine\Eunoia-Engine.dll\ (xcopy /Q /E /Y /I ..\Bin\Release-windows-x86_64\Eunoia-Engine\Eunoia-Engine.dll ..\Bin\Release-windows-x86_64\Eunoia-Editor\Eunoia-Engine.dll &gt; nul) ELSE (xcopy /Q /Y /I ..\Bin\Release-windows-x86_64\Eunoia-Engine\Eunoia-Engine.dll ..\Bin\Release-windows-x86_64\Eunoia-Editor\Eunoia-Engine.dll &gt; nul)</Command>
+    </PostBuildEvent>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Dist|x64'">
+    <ClCompile>
+      <PrecompiledHeader>NotUsing</PrecompiledHeader>
+      <WarningLevel>Level3</WarningLevel>
+      <PreprocessorDefinitions>EU_BUILD_DLL;EU_ENGINE;EU_PLATFORM_WINDOWS;EU_DIST;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <AdditionalIncludeDirectories>Libs\Vulkan\Include;Libs\glm\Include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <Optimization>Full</Optimization>
+      <FunctionLevelLinking>true</FunctionLevelLinking>
+      <IntrinsicFunctions>true</IntrinsicFunctions>
+      <MinimalRebuild>false</MinimalRebuild>
+      <StringPooling>true</StringPooling>
+      <RuntimeLibrary>MultiThreaded</RuntimeLibrary>
+      <LanguageStandard>stdcpp17</LanguageStandard>
+    </ClCompile>
+    <Link>
+      <SubSystem>Windows</SubSystem>
+      <EnableCOMDATFolding>true</EnableCOMDATFolding>
+      <OptimizeReferences>true</OptimizeReferences>
+      <AdditionalDependencies>Libs\Vulkan\x64\vulkan-1.lib;Xinput9_1_0.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <ImportLibrary>..\Bin\Dist-windows-x86_64\Eunoia-Engine\Eunoia-Engine.lib</ImportLibrary>
+    </Link>
+    <PreBuildEvent>
+      <Command>call "../Bin/Dist-windows-x86_64/Eunoia-Introspection/Eunoia-Introspection.exe" "Src/Eunoia/Eunoia.h" "Src/Eunoia/Metadata/EunoiaGenerated"</Command>
+    </PreBuildEvent>
+    <PostBuildEvent>
+      <Command>IF EXIST ..\Bin\Dist-windows-x86_64\Eunoia-Engine\Eunoia-Engine.dll\ (xcopy /Q /E /Y /I ..\Bin\Dist-windows-x86_64\Eunoia-Engine\Eunoia-Engine.dll ..\Bin\Dist-windows-x86_64\Eunoia-Sandbox\Eunoia-Engine.dll &gt; nul) ELSE (xcopy /Q /Y /I ..\Bin\Dist-windows-x86_64\Eunoia-Engine\Eunoia-Engine.dll ..\Bin\Dist-windows-x86_64\Eunoia-Sandbox\Eunoia-Engine.dll &gt; nul)
+IF EXIST ..\Bin\Dist-windows-x86_64\Eunoia-Engine\Eunoia-Engine.dll\ (xcopy /Q /E /Y /I ..\Bin\Dist-windows-x86_64\Eunoia-Engine\Eunoia-Engine.dll ..\Bin\Dist-windows-x86_64\Eunoia-Editor\Eunoia-Engine.dll &gt; nul) ELSE (xcopy /Q /Y /I ..\Bin\Dist-windows-x86_64\Eunoia-Engine\Eunoia-Engine.dll ..\Bin\Dist-windows-x86_64\Eunoia-Editor\Eunoia-Engine.dll &gt; nul)</Command>
+    </PostBuildEvent>
+  </ItemDefinitionGroup>
+  <ItemGroup>
+    <ClInclude Include="Src\Eunoia\Common.h" />
+    <ClInclude Include="Src\Eunoia\Core\Application.h" />
+    <ClInclude Include="Src\Eunoia\Core\ApplicationInfo.h" />
+    <ClInclude Include="Src\Eunoia\Core\Engine.h" />
+    <ClInclude Include="Src\Eunoia\Core\EngineDebugInfo.h" />
+    <ClInclude Include="Src\Eunoia\Core\Input.h" />
+    <ClInclude Include="Src\Eunoia\Core\InputDefs.h" />
+    <ClInclude Include="Src\Eunoia\DataStructures\List.h" />
+    <ClInclude Include="Src\Eunoia\DataStructures\Map.h" />
+    <ClInclude Include="Src\Eunoia\DataStructures\String.h" />
+    <ClInclude Include="Src\Eunoia\ECS\Components\Camera2DComponent.h" />
+    <ClInclude Include="Src\Eunoia\ECS\Components\Camera3DComponent.h" />
+    <ClInclude Include="Src\Eunoia\ECS\Components\Collider2DComponent.h" />
+    <ClInclude Include="Src\Eunoia\ECS\Components\Components.h" />
+    <ClInclude Include="Src\Eunoia\ECS\Components\Light2DComponent.h" />
+    <ClInclude Include="Src\Eunoia\ECS\Components\MaterialComponent.h" />
+    <ClInclude Include="Src\Eunoia\ECS\Components\ModelComponent.h" />
+    <ClInclude Include="Src\Eunoia\ECS\Components\SpriteComponent.h" />
+    <ClInclude Include="Src\Eunoia\ECS\Components\SpriteGroupComponent.h" />
+    <ClInclude Include="Src\Eunoia\ECS\Components\Standard2DMovementComponent.h" />
+    <ClInclude Include="Src\Eunoia\ECS\Components\Transform2DComponent.h" />
+    <ClInclude Include="Src\Eunoia\ECS\Components\Transform3DComponent.h" />
+    <ClInclude Include="Src\Eunoia\ECS\ECS.h" />
+    <ClInclude Include="Src\Eunoia\ECS\ECSLoader.h" />
+    <ClInclude Include="Src\Eunoia\ECS\ECSTypes.h" />
+    <ClInclude Include="Src\Eunoia\ECS\Events\CollisionEvent.h" />
+    <ClInclude Include="Src\Eunoia\ECS\Events\Events.h" />
+    <ClInclude Include="Src\Eunoia\ECS\Systems\Camera2DSystem.h" />
+    <ClInclude Include="Src\Eunoia\ECS\Systems\Camera3DSystem.h" />
+    <ClInclude Include="Src\Eunoia\ECS\Systems\Collider2DSubmissionSystem.h" />
+    <ClInclude Include="Src\Eunoia\ECS\Systems\ModelSubmissionSystem.h" />
+    <ClInclude Include="Src\Eunoia\ECS\Systems\Physics2DForcesSystem.h" />
+    <ClInclude Include="Src\Eunoia\ECS\Systems\SpriteGroupSubmissionSystem.h" />
+    <ClInclude Include="Src\Eunoia\ECS\Systems\SpriteSubmissionSystem.h" />
+    <ClInclude Include="Src\Eunoia\ECS\Systems\Standard2DMovementSystem.h" />
+    <ClInclude Include="Src\Eunoia\ECS\Systems\Systems.h" />
+    <ClInclude Include="Src\Eunoia\ECS\Systems\Transform2DHierarchySystem.h" />
+    <ClInclude Include="Src\Eunoia\ECS\Systems\Transform3DHierarchySystem.h" />
+    <ClInclude Include="Src\Eunoia\Eunoia.h" />
+    <ClInclude Include="Src\Eunoia\Math\GeneralMath.h" />
+    <ClInclude Include="Src\Eunoia\Math\Math.h" />
+    <ClInclude Include="Src\Eunoia\Memory\Allocators.h" />
+    <ClInclude Include="Src\Eunoia\Memory\Memory.h" />
+    <ClInclude Include="Src\Eunoia\Metadata\EunoiaGenerated.h" />
+    <ClInclude Include="Src\Eunoia\Metadata\Metadata.h" />
+    <ClInclude Include="Src\Eunoia\Metadata\MetadataInfo.h" />
+    <ClInclude Include="Src\Eunoia\Physics2D\Collider2D.h" />
+    <ClInclude Include="Src\Eunoia\Physics2D\Collision\CollisionInfo2D.h" />
+    <ClInclude Include="Src\Eunoia\Physics2D\Collision\PhysicsCollisionDetection2D.h" />
+    <ClInclude Include="Src\Eunoia\Physics2D\Collision\PhysicsCollisionDetection2DAABB_AABB.h" />
+    <ClInclude Include="Src\Eunoia\Physics2D\Collision\PhysicsCollisionDetection2DAABB_Sphere.h" />
+    <ClInclude Include="Src\Eunoia\Physics2D\Collision\PhysicsCollisionDetection2DSphere_Sphere.h" />
+    <ClInclude Include="Src\Eunoia\Physics2D\PhysicsEngine2D.h" />
+    <ClInclude Include="Src\Eunoia\Platform\Vulkan\RenderContextVK.h" />
+    <ClInclude Include="Src\Eunoia\Platform\Win32\ConsoleWin32.h" />
+    <ClInclude Include="Src\Eunoia\Platform\Win32\DisplayWin32.h" />
+    <ClInclude Include="Src\Eunoia\Rendering\Asset\AssetManager.h" />
+    <ClInclude Include="Src\Eunoia\Rendering\Asset\LoadedMaterial.h" />
+    <ClInclude Include="Src\Eunoia\Rendering\Asset\LoadedModel.h" />
+    <ClInclude Include="Src\Eunoia\Rendering\Asset\Material.h" />
+    <ClInclude Include="Src\Eunoia\Rendering\Asset\MaterialLoader.h" />
+    <ClInclude Include="Src\Eunoia\Rendering\Asset\Model.h" />
+    <ClInclude Include="Src\Eunoia\Rendering\Asset\ModelLoader.h" />
+    <ClInclude Include="Src\Eunoia\Rendering\Asset\PresetAssetIDs.h" />
+    <ClInclude Include="Src\Eunoia\Rendering\Asset\TextureLoader.h" />
+    <ClInclude Include="Src\Eunoia\Rendering\Display.h" />
+    <ClInclude Include="Src\Eunoia\Rendering\DisplayInfo.h" />
+    <ClInclude Include="Src\Eunoia\Rendering\MasterRenderer.h" />
+    <ClInclude Include="Src\Eunoia\Rendering\RenderAPI.h" />
+    <ClInclude Include="Src\Eunoia\Rendering\RenderContext.h" />
+    <ClInclude Include="Src\Eunoia\Rendering\Renderer.h" />
+    <ClInclude Include="Src\Eunoia\Rendering\Renderer2D.h" />
+    <ClInclude Include="Src\Eunoia\Rendering\Renderer3D.h" />
+    <ClInclude Include="Src\Eunoia\Utils\FileUtils.h" />
+    <ClInclude Include="Src\Eunoia\Utils\Log.h" />
+    <ClInclude Include="Src\Eunoia\Utils\Log\Console.h" />
+    <ClInclude Include="Src\Eunoia\Utils\Log\Logger.h" />
+    <ClInclude Include="Src\Vendor\SPIRV-Reflect\include\spirv\unified1\spirv.h" />
+    <ClInclude Include="Src\Vendor\SPIRV-Reflect\spirv_reflect.h" />
+    <ClInclude Include="Src\Vendor\spdlog\async.h" />
+    <ClInclude Include="Src\Vendor\spdlog\async_logger.h" />
+    <ClInclude Include="Src\Vendor\spdlog\common.h" />
+    <ClInclude Include="Src\Vendor\spdlog\details\async_logger_impl.h" />
+    <ClInclude Include="Src\Vendor\spdlog\details\circular_q.h" />
+    <ClInclude Include="Src\Vendor\spdlog\details\console_globals.h" />
+    <ClInclude Include="Src\Vendor\spdlog\details\file_helper.h" />
+    <ClInclude Include="Src\Vendor\spdlog\details\fmt_helper.h" />
+    <ClInclude Include="Src\Vendor\spdlog\details\log_msg.h" />
+    <ClInclude Include="Src\Vendor\spdlog\details\logger_impl.h" />
+    <ClInclude Include="Src\Vendor\spdlog\details\mpmc_blocking_q.h" />
+    <ClInclude Include="Src\Vendor\spdlog\details\null_mutex.h" />
+    <ClInclude Include="Src\Vendor\spdlog\details\os.h" />
+    <ClInclude Include="Src\Vendor\spdlog\details\pattern_formatter.h" />
+    <ClInclude Include="Src\Vendor\spdlog\details\periodic_worker.h" />
+    <ClInclude Include="Src\Vendor\spdlog\details\registry.h" />
+    <ClInclude Include="Src\Vendor\spdlog\details\thread_pool.h" />
+    <ClInclude Include="Src\Vendor\spdlog\fmt\bin_to_hex.h" />
+    <ClInclude Include="Src\Vendor\spdlog\fmt\bundled\chrono.h" />
+    <ClInclude Include="Src\Vendor\spdlog\fmt\bundled\color.h" />
+    <ClInclude Include="Src\Vendor\spdlog\fmt\bundled\core.h" />
+    <ClInclude Include="Src\Vendor\spdlog\fmt\bundled\format-inl.h" />
+    <ClInclude Include="Src\Vendor\spdlog\fmt\bundled\format.h" />
+    <ClInclude Include="Src\Vendor\spdlog\fmt\bundled\locale.h" />
+    <ClInclude Include="Src\Vendor\spdlog\fmt\bundled\ostream.h" />
+    <ClInclude Include="Src\Vendor\spdlog\fmt\bundled\posix.h" />
+    <ClInclude Include="Src\Vendor\spdlog\fmt\bundled\printf.h" />
+    <ClInclude Include="Src\Vendor\spdlog\fmt\bundled\ranges.h" />
+    <ClInclude Include="Src\Vendor\spdlog\fmt\bundled\time.h" />
+    <ClInclude Include="Src\Vendor\spdlog\fmt\fmt.h" />
+    <ClInclude Include="Src\Vendor\spdlog\fmt\ostr.h" />
+    <ClInclude Include="Src\Vendor\spdlog\formatter.h" />
+    <ClInclude Include="Src\Vendor\spdlog\logger.h" />
+    <ClInclude Include="Src\Vendor\spdlog\sinks\android_sink.h" />
+    <ClInclude Include="Src\Vendor\spdlog\sinks\ansicolor_sink.h" />
+    <ClInclude Include="Src\Vendor\spdlog\sinks\base_sink.h" />
+    <ClInclude Include="Src\Vendor\spdlog\sinks\basic_file_sink.h" />
+    <ClInclude Include="Src\Vendor\spdlog\sinks\daily_file_sink.h" />
+    <ClInclude Include="Src\Vendor\spdlog\sinks\dist_sink.h" />
+    <ClInclude Include="Src\Vendor\spdlog\sinks\msvc_sink.h" />
+    <ClInclude Include="Src\Vendor\spdlog\sinks\null_sink.h" />
+    <ClInclude Include="Src\Vendor\spdlog\sinks\ostream_sink.h" />
+    <ClInclude Include="Src\Vendor\spdlog\sinks\rotating_file_sink.h" />
+    <ClInclude Include="Src\Vendor\spdlog\sinks\sink.h" />
+    <ClInclude Include="Src\Vendor\spdlog\sinks\stdout_color_sinks.h" />
+    <ClInclude Include="Src\Vendor\spdlog\sinks\stdout_sinks.h" />
+    <ClInclude Include="Src\Vendor\spdlog\sinks\syslog_sink.h" />
+    <ClInclude Include="Src\Vendor\spdlog\sinks\systemd_sink.h" />
+    <ClInclude Include="Src\Vendor\spdlog\sinks\wincolor_sink.h" />
+    <ClInclude Include="Src\Vendor\spdlog\spdlog.h" />
+    <ClInclude Include="Src\Vendor\spdlog\tweakme.h" />
+    <ClInclude Include="Src\Vendor\spdlog\version.h" />
+    <ClInclude Include="Src\Vendor\stb_image\stb_image.h" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="Src\Eunoia\Core\Engine.cpp" />
+    <ClCompile Include="Src\Eunoia\Core\Input.cpp" />
+    <ClCompile Include="Src\Eunoia\DataStructures\String.cpp" />
+    <ClCompile Include="Src\Eunoia\ECS\ECS.cpp" />
+    <ClCompile Include="Src\Eunoia\ECS\ECSLoader.cpp" />
+    <ClCompile Include="Src\Eunoia\ECS\Systems\Camera2DSystem.cpp" />
+    <ClCompile Include="Src\Eunoia\ECS\Systems\Camera3DSystem.cpp" />
+    <ClCompile Include="Src\Eunoia\ECS\Systems\Collider2DSubmissionSystem.cpp" />
+    <ClCompile Include="Src\Eunoia\ECS\Systems\ModelSubmissionSystem.cpp" />
+    <ClCompile Include="Src\Eunoia\ECS\Systems\Physics2DForcesSystem.cpp" />
+    <ClCompile Include="Src\Eunoia\ECS\Systems\SpriteGroupSubmissionSystem.cpp" />
+    <ClCompile Include="Src\Eunoia\ECS\Systems\SpriteSubmissionSystem.cpp" />
+    <ClCompile Include="Src\Eunoia\ECS\Systems\Standard2DMovementSystem.cpp" />
+    <ClCompile Include="Src\Eunoia\ECS\Systems\Transform2DHierarchySystem.cpp" />
+    <ClCompile Include="Src\Eunoia\ECS\Systems\Transform3DHierarchySystem.cpp" />
+    <ClCompile Include="Src\Eunoia\Math\Math.cpp" />
+    <ClCompile Include="Src\Eunoia\Memory\Allocators.cpp" />
+    <ClCompile Include="Src\Eunoia\Memory\Memory.cpp" />
+    <ClCompile Include="Src\Eunoia\Metadata\EunoiaGenerated.cpp" />
+    <ClCompile Include="Src\Eunoia\Metadata\Metadata.cpp" />
+    <ClCompile Include="Src\Eunoia\Physics2D\Collision\PhysicsCollisionDetection2DAABB_AABB.cpp" />
+    <ClCompile Include="Src\Eunoia\Physics2D\Collision\PhysicsCollisionDetection2DAABB_Sphere.cpp" />
+    <ClCompile Include="Src\Eunoia\Physics2D\Collision\PhysicsCollisionDetection2DSphere_Sphere.cpp" />
+    <ClCompile Include="Src\Eunoia\Physics2D\PhysicsEngine2D.cpp" />
+    <ClCompile Include="Src\Eunoia\Platform\Vulkan\RenderContextVK.cpp" />
+    <ClCompile Include="Src\Eunoia\Platform\Win32\ConsoleWin32.cpp" />
+    <ClCompile Include="Src\Eunoia\Platform\Win32\DisplayWin32.cpp" />
+    <ClCompile Include="Src\Eunoia\Rendering\Asset\AssetManager.cpp" />
+    <ClCompile Include="Src\Eunoia\Rendering\Asset\MaterialLoadder.cpp" />
+    <ClCompile Include="Src\Eunoia\Rendering\Asset\ModelLoader.cpp" />
+    <ClCompile Include="Src\Eunoia\Rendering\Asset\PresetAssetIDs.cpp" />
+    <ClCompile Include="Src\Eunoia\Rendering\Asset\TextureLoader.cpp" />
+    <ClCompile Include="Src\Eunoia\Rendering\Display.cpp" />
+    <ClCompile Include="Src\Eunoia\Rendering\MasterRenderer.cpp" />
+    <ClCompile Include="Src\Eunoia\Rendering\RenderContext.cpp" />
+    <ClCompile Include="Src\Eunoia\Rendering\Renderer.cpp" />
+    <ClCompile Include="Src\Eunoia\Rendering\Renderer2D.cpp" />
+    <ClCompile Include="Src\Eunoia\Rendering\Renderer3D.cpp" />
+    <ClCompile Include="Src\Eunoia\Utils\FileUtils.cpp" />
+    <ClCompile Include="Src\Eunoia\Utils\Log.cpp" />
+    <ClCompile Include="Src\Vendor\SPIRV-Reflect\spirv_reflect.cpp" />
+  </ItemGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
+  <ImportGroup Label="ExtensionTargets">
+  </ImportGroup>
+</Project>
